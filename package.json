@@ -1,0 +1,27 @@
+{
+	"name": "koa-datadog",
+	"version": "0.1.0",
+	"description": "Datadog middleware for Koa",
+	"main": "index.js",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/kouhin/koa-datadog.git"
+	},
+	"scripts": {
+		"test": "jest"
+	},
+	"keywords": [
+		"datadog",
+		"middleware"
+	],
+	"author": "Bin Hou <houbin217jz@gmail.com> (https://twitter.com/houbin217jz)",
+	"license": "MIT",
+	"readmeFilename": "README.md",
+	"dependencies": {
+		"hot-shots": "^6.3.0"
+	},
+	"devDependencies": {
+		"jest": "^24.8.0",
+		"prettier": "^1.17.1"
+	}
+}
