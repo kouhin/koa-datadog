@@ -25,6 +25,7 @@ All options are optional.
 * `dogstatsd` hot-shots client. `default = new require("hot-shots")()`
 * `stat` *string* name for the stat. `default = "node.express.router"`
 * `tags` *array* of tags to be added to the histogram. `default = []`
+* `route`*boolean* include route tag (only koa-router is support). `default = false`
 * `path` *boolean* include path tag. `default = false`
 * `method` *boolean* include http method tag. `default = false`
 * `protocol` *boolean* include protocol tag. `default = false`
