@@ -1,6 +1,6 @@
 {
   "name": "koa-datadog",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Datadog middleware for Koa",
   "main": "index.js",
   "repository": {
@@ -22,6 +22,6 @@
   },
   "devDependencies": {
     "jest": "^24.8.0",
-    "prettier": "^1.17.1"
+    "prettier": "^1.18.2"
   }
 }
