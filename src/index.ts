@@ -1,6 +1,19 @@
-const StatsD = require('hot-shots');
+import { StatsD } from 'hot-shots';
+import Koa from 'koa';
 
-module.exports = function(options) {
+export interface Options {
+  dogstatsd?: StatsD;
+  stat?: string;
+  tags?: string[];
+  route?: boolean;
+  path?: boolean;
+  method?: boolean;
+  protocol?: boolean;
+  response_code?: boolean;
+  delim?: string;
+}
+
+export function createDatadogMiddleware(options: Options): Koa.Middleware {
   const opts = options || {};
   const datadog = opts.dogstatsd || new StatsD();
   const stat = opts.stat || 'node.express.router';
@@ -20,14 +33,18 @@ module.exports = function(options) {
    * @param  {*}       str  The string to check for pipe chars
    * @return {string}       The input string with pipe chars replaced
    */
-  function replacePipeChar(str) {
+  function replacePipeChar(str: string | RegExp): string {
     if (str instanceof RegExp) {
       str = str.toString();
     }
     return str && str.replace(REGEX_PIPE, DELIM);
   }
 
-  function send(ctx, startTime, err) {
+  interface HttpError extends Error {
+    status?: number;
+  }
+
+  function send(ctx: Koa.Context, startTime: number, err?: HttpError) {
     if (!ctx.path) {
       return;
     }
@@ -68,7 +85,7 @@ module.exports = function(options) {
     );
   }
 
-  return async function(ctx, next) {
+  return async function(ctx: Koa.Context, next: () => Promise<void>) {
     const startTime = Date.now();
     try {
       await next();
@@ -79,3 +96,5 @@ module.exports = function(options) {
     send(ctx, startTime);
   };
 };
+
+export default createDatadogMiddleware;
