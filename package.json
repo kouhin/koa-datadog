@@ -1,6 +1,6 @@
 {
   "name": "koa-datadog",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "Datadog middleware for Koa",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
