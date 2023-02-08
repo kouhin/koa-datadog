@@ -85,16 +85,19 @@ export function createDatadogMiddleware(options: Options): Koa.Middleware {
     );
   }
 
-  return async function koaDatadog(ctx: Koa.Context, next: () => Promise<void>) {
+  return async function koaDatadog(
+    ctx: Koa.Context,
+    next: () => Promise<void>
+  ) {
     const startTime = Date.now();
     try {
       await next();
     } catch (err) {
-      send(ctx, startTime, err);
+      send(ctx, startTime, err as HttpError);
       throw err;
     }
     send(ctx, startTime);
   };
-};
+}
 
 export default createDatadogMiddleware;
